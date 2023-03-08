@@ -10,22 +10,6 @@ type Props = {
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 };
 
-// function onEditClick(e: React.MouseEvent<HTMLSpanElement, MouseEvent>): void {
-//   console.log(e);
-// }
-
-function onDeleteClick(e: React.MouseEvent<HTMLSpanElement, MouseEvent>): void {
-  console.log(e);
-}
-
-function onDoneClick(e: React.MouseEvent<HTMLSpanElement, MouseEvent>): void {
-  console.log(e);
-}
-
-function onEditClick(e: any): void {
-  console.log(document.querySelector("#edit-icon")?.getAttribute("data-custom-attribute"));
-}
-
 export const SingleTodo = ({ todo, todos, setTodos }: Props) => {
   return (
     <form action="" className="todos__single">
@@ -34,18 +18,37 @@ export const SingleTodo = ({ todo, todos, setTodos }: Props) => {
         <span
           id="edit-icon"
           className="icon"
+          onClick={onSpanClick}
           data-custom-attribute="foo"
-          onClick={(e) => onEditClick(e)}
         >
           <AiFillEdit></AiFillEdit>
         </span>
-        <span className="icon" onClick={(e) => onDeleteClick(e)}>
+        <span
+          id="delete-icon"
+          className="icon"
+          onClick={onSpanClick}
+          data-custom-attribute="foo1"
+        >
           <AiFillDelete></AiFillDelete>
         </span>
-        <span className="icon" onClick={(e) => onDoneClick(e)}>
+        <span
+          id="done-icon"
+          className="icon"
+          onClick={onSpanClick}
+          data-custom-attribute="foo2"
+        >
           <MdDone></MdDone>
         </span>
       </div>
     </form>
   );
 };
+
+function onSpanClick(event: any): any {
+  // console.log(event.currentTarget.id);
+  console.log(
+    document
+      .querySelector("#" + event.currentTarget.id)
+      ?.getAttribute("data-custom-attribute")
+  );
+}
